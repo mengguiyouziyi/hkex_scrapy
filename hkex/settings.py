@@ -20,6 +20,10 @@ DOWNLOADER_MIDDLEWARES = {
     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,  # 禁止内置的中间件
 }
 
+ITEM_PIPELINES = {
+    'hkex.pipelines.MongodbPipeline': 800,
+}
+
 #禁用cookies
 COOKIES_ENABLES = False
 
@@ -31,7 +35,7 @@ ROBOTSTXT_OBEY = False
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 2  # 间隔时间,两次下载的间隔
+# DOWNLOAD_DELAY = 2  # 间隔时间,两次下载的间隔
 # RANDOMIZE_DOWNLOAD_DELAY = True  # 开启随机延迟
 
 USER_AGENT_CHOICES = [
@@ -57,15 +61,20 @@ LOG_LEVEL = 'INFO'
 # DOWNLOAD_TIMEOUT = 15
 
 # Override the default request headers:
-# DEFAULT_REQUEST_HEADERS = {
-#     'Host': 'www.hkex.com.hk',
-#     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-#     'Accept-Language': 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
-#     'Accept-Encoding': 'gzip, deflate',
-#     'Referer': 'http://www.hkex.com.hk/eng/prod/product.htm',
-#     'Connection': 'keep-alive',
-#     'Upgrade-Insecure-Requests': '1',
-#     'If-Modified-Since': 'Thu, 20 Apr 2017 05:39:20 GMT',
-#     'If-None-Match': '"0f4387598b9d21:0"',
-#     'Cache-Control': 'max-age=0',
-# }
+DEFAULT_REQUEST_HEADERS = {
+    'Host': 'www.hkex.com.hk',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Language': 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+    'Accept-Encoding': 'gzip, deflate',
+    'Referer': 'http://www.hkex.com.hk/eng/prod/product.htm',
+    'Connection': 'keep-alive',
+    'Upgrade-Insecure-Requests': '1',
+    'If-Modified-Since': 'Thu, 20 Apr 2017 05:39:20 GMT',
+    'If-None-Match': '"0f4387598b9d21:0"',
+    'Cache-Control': 'max-age=0',
+}
+
+MONGODB_HOST = '192.168.90.9'
+MONGODB_PORT = 27017
+MONGODB_DBNAME = 'hkex'
+MONGODB_DOCNAME = 'all_url'

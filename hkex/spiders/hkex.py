@@ -1,34 +1,34 @@
 # -*- coding: utf-8 -*-
-import scrapy
+# import scrapy
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 import codecs
-from urllib.request import urlretrieve
-import os.path
+# from urllib.request import urlretrieve
+# import os.path
 # from scrapy import selector
 # from django.utils.html import strip_tags
 # import re
 
 class HkexSpider(CrawlSpider):
     name = 'hkex'
-    # allowed_domains = ['hkex.com.hk', 'hkex.hk']
-    start_urls = ['http://www.hkexnews.hk/listedco/listconews/mainindex/SEHK_LISTEDCO_DATETIME_TODAY.HTM']
+    allowed_domains = ['hkex.com.hk', 'hkex.hk', 'hkexnews.hk']
+    start_urls = ['http://www.hkexnews.hk/listedco/listconews/mainindex/SEHK_LISTEDCO_DATETIME_TODAY.HTM',
+                  'http://www.hkex.com.hk/eng/index.htm']
 
     rules = (
         # Rule(LinkExtractor(allow=''), follow=True),
-        Rule(LinkExtractor(allow='pdf'), callback='parse_item', follow=True),
+        Rule(LinkExtractor(allow=''), callback='parse_item', follow=True),
     )
 
     def parse_item(self, response):
-        print(response.status)
-        print(response.url)
+        # print(response.url)
         # print(response.body_as_unicode())
         # with codecs.open('aa.html', 'a', 'utf-8') as f:
         #     f.writelines(response.body_as_unicode())
 
         # 记录pdf url
-        # with codecs.open('pdf_url.txt', 'a', 'utf-8') as f:
-        #     f.writelines(response.url)
+        with codecs.open('pdf_url.txt', 'a', 'utf-8') as f:
+            f.writelines(response.url)
         # # 下载pdf文件
         # article_name = response.url.split('/')[-1]
         # save_folder = "./download/"
