@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MongoConfiguration">
+    <option name="serverConfigurations">
+      <list>
+        <ServerConfiguration>
+          <option name="label" value="hkex" />
+          <option name="serverUrls">
+            <list>
+              <option value="localhost:27017" />
+            </list>
+          </option>
+          <option name="sshTunnelingConfiguration">
+            <SshTunnelingConfiguration />
+          </option>
+          <option name="userDatabase" value="hkexdb" />
+        </ServerConfiguration>
+        <ServerConfiguration>
+          <option name="label" value="hkex@172.17.0.53(中译华北1)" />
+          <option name="serverUrls">
+            <list>
+              <option value="172.17.0.53:27017" />
+            </list>
+          </option>
+          <option name="sshTunnelingConfiguration">
+            <SshTunnelingConfiguration />
+          </option>
+          <option name="userDatabase" value="hkexdb" />
+        </ServerConfiguration>
+      </list>
+    </option>
+  </component>
+</project>
