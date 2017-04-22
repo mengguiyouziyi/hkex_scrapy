@@ -29,7 +29,7 @@ class HkexSpider(CrawlSpider):
         url = response.url
         # 记录pdf url
         with codecs.open('url.txt', 'a', 'utf-8') as f:
-            f.writelines(url)
+            f.writelines(url + '\n')
         # item
         item = HkexItem()
         item['url'] = url
