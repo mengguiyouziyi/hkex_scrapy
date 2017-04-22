@@ -3,7 +3,7 @@
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 import codecs
-from hkex.items import HkexItem
+from ..items import HkexItem
 # from urllib.request import urlretrieve
 # import os.path
 # from scrapy import selector
