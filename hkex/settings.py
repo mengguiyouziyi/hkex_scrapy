@@ -74,7 +74,7 @@ DEFAULT_REQUEST_HEADERS = {
     'Cache-Control': 'max-age=0',
 }
 
-MONGODB_HOST = '192.168.90.9'
+MONGODB_HOST = '127.0.0.1'
 MONGODB_PORT = 27017
 MONGODB_DBNAME = 'hkex'
-MONGODB_DOCNAME = 'all_url'
+MONGODB_COLECNAME = 'all_url'

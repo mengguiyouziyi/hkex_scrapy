@@ -3,6 +3,7 @@
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 import codecs
+from hkex.items import HkexItem
 # from urllib.request import urlretrieve
 # import os.path
 # from scrapy import selector
@@ -25,10 +26,14 @@ class HkexSpider(CrawlSpider):
         # print(response.body_as_unicode())
         # with codecs.open('aa.html', 'a', 'utf-8') as f:
         #     f.writelines(response.body_as_unicode())
-
+        url = response.url
         # 记录pdf url
-        with codecs.open('pdf_url.txt', 'a', 'utf-8') as f:
-            f.writelines(response.url)
+        with codecs.open('url.txt', 'a', 'utf-8') as f:
+            f.writelines(url)
+        # item
+        item = HkexItem()
+        item['url'] = url
+        yield item
         # # 下载pdf文件
         # article_name = response.url.split('/')[-1]
         # save_folder = "./download/"

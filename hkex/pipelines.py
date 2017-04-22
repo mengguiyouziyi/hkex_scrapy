@@ -15,7 +15,7 @@ class MongodbPipeline(object):
         dbname=settings['MONGODB_DBNAME']#数据库名
         client=pymongo.MongoClient(host=host,port=port)
         tdb=client[dbname]
-        self.port=tdb[settings['MONGODB_DOCNAME']]#表名
+        self.port=tdb[settings['MONGODB_COLECNAME']]#表名
     def process_item(self, item, spider):
         agentinfo=dict(item)
         self.port.insert(agentinfo)
