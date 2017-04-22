@@ -69,8 +69,8 @@ DEFAULT_REQUEST_HEADERS = {
     'Referer': 'http://www.hkex.com.hk/eng/prod/product.htm',
     'Connection': 'keep-alive',
     'Upgrade-Insecure-Requests': '1',
-    'If-Modified-Since': 'Thu, 20 Apr 2017 05:39:20 GMT',
-    'If-None-Match': '"0f4387598b9d21:0"',
+    # 'If-Modified-Since': 'Thu, 20 Apr 2017 05:39:20 GMT',
+    # 'If-None-Match': '"0f4387598b9d21:0"',
     'Cache-Control': 'max-age=0',
 }
 
