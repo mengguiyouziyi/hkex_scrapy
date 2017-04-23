@@ -23,11 +23,14 @@ class HkexSpider(CrawlSpider):
 
         if url.lower().endswith('_c.pdf') or url.lower().endswith('_c.xls'):
             folder = url.split('/')[-1].split('.')[-2]
-
-
             base_url = '/'.join(url.split('/')[:-1]) + '/'
             num = int(url.split('/')[-1][11:-6])
-            url_en = base_url + url.split('/')[-1][:12] + str(num - 1) + '.pdf'
+            if url.lower().endswith('_c.pdf'):
+                url_en = base_url + url.split('/')[-1][:12] + str(num - 1) + '.pdf'
+            else:
+                url_en = base_url + url.split('/')[-1][:12] + str(num - 1) + '.xls'
+
+
 
         elif url.lower().endswith('_c.doc') or url.lower().endswith('_c.htm'):
             folder = url.split('/')[-1].split('.')[-2]
