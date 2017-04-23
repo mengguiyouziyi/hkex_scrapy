@@ -66,7 +66,7 @@ DEFAULT_REQUEST_HEADERS = {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
     'Accept-Language': 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
     'Accept-Encoding': 'gzip, deflate',
-    'Referer': 'http://www.hkex.com.hk/eng/prod/product.htm',
+    'Referer': 'http://www.hkexnews.hk/listedco/listconews/advancedsearch/search_active_main_c.aspx',
     'Connection': 'keep-alive',
     'Upgrade-Insecure-Requests': '1',
     # 'If-Modified-Since': 'Thu, 20 Apr 2017 05:39:20 GMT',
