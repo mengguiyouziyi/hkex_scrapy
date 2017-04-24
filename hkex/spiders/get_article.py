@@ -15,7 +15,7 @@ class HkexSpider(CrawlSpider):
         with codecs.open('hkex_cn.txt', 'r', 'utf-8') as file:
             hkex_cns = file.readlines()
         for hkex_cn in hkex_cns:
-            yield scrapy.Request(hkex_cn.strip(), callback=self.parse_item)
+            yield scrapy.Request('http://www.hkexnews.hk'+hkex_cn.strip(), callback=self.parse_item)
 
     def parse_item(self, response):
         # http://www.hkexnews.hk/listedco/listconews/SEHK/2016/1027/LTN20161027393_C.pdf
