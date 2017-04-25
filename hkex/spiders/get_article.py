@@ -12,7 +12,7 @@ import re
 class HkexSpider(CrawlSpider):
     name = 'get_article'
     def start_requests(self):
-        with codecs.open('hkex_cn_test.txt', 'r', 'utf-8') as file:
+        with codecs.open('hkex_cn.txt', 'r', 'utf-8') as file:
             hkex_cns = file.readlines()
         for index, hkex_cn in enumerate(hkex_cns):
             count = index + 1
