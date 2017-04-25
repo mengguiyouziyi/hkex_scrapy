@@ -103,28 +103,61 @@ class HkexSpider(CrawlSpider):
                 urlretrieve(url_en, article_path_en)
                 # print('en_xls')
         elif url.lower().endswith('_c.doc'):
-            # 不用-1，去掉_C就是英文url。其他无区别
-            # 构造单个文件目录
-            doc_folder = base_folders[2] + name + '/'
+            base_url = '/'.join(url.split('/')[:-1]) + '/'
+            doc_folder = base_folders[1] + name + '/'
             if not os.path.exists(doc_folder):
                 os.makedirs(doc_folder)
-            # 下载中文doc
+
             article_name = name + '.doc'
             article_path = os.path.join(doc_folder, article_name)
             urlretrieve(url, article_path)
-            # print('cn_doc')
+            # print('cn_xls')
 
-            # 下载英文doc
             url_test1 = url[:-6] + url[-4:]
-            # 如果能返回，就构造英文链接
-            if self.test_url(url_test1) != 200:
-                pass
-            url_en = url_test1
-            name_en = name[:-2]
-            article_name_en = name_en + '.doc'
-            article_path_en = os.path.join(doc_folder, article_name_en)
-            urlretrieve(url_en, article_path_en)
-            # print('en_doc')
+            # print('1111111111111'+url_test1)
+            num_en = url.split('/')[-1][11:-6]
+            url_test2 = base_url + url.split('/')[-1][:11] + str(int(num_en) - 1) + '.doc'
+            # print('2222222222222222'+url_test2)
+            if self.test_url(url_test1) == 200:
+                url_en = url_test1
+                # print('========================' + url_en)
+                name_en = url_en.split('/')[-1].split('.')[-2]
+                article_name_en = name_en + '.doc'
+                article_path_en = os.path.join(doc_folder, article_name_en)
+                urlretrieve(url_en, article_path_en)
+                # print('en_xls')
+            elif self.test_url(url_test2) == 200:
+                url_en = url_test2
+                # print('========================' + url_en)
+                name_en = url_en.split('/')[-1].split('.')[-2]
+                article_name_en = name_en + '.doc'
+                article_path_en = os.path.join(doc_folder, article_name_en)
+                urlretrieve(url_en, article_path_en)
+                # print('en_xls')
+
+
+            # # 不用-1，去掉_C就是英文url。其他无区别
+            # # 构造单个文件目录
+            # doc_folder = base_folders[2] + name + '/'
+            # if not os.path.exists(doc_folder):
+            #     os.makedirs(doc_folder)
+            # # 下载中文doc
+            # article_name = name + '.doc'
+            # article_path = os.path.join(doc_folder, article_name)
+            # urlretrieve(url, article_path)
+            # # print('cn_doc')
+            #
+            # # 下载英文doc
+            # url_test1 = url[:-6] + url[-4:]
+            # # 如果能返回，就构造英文链接
+            # if self.test_url(url_test1) != 200:
+            #     pass
+            # url_en = url_test1
+            # name_en = name[:-2]
+            # article_name_en = name_en + '.doc'
+            # article_path_en = os.path.join(doc_folder, article_name_en)
+            # urlretrieve(url_en, article_path_en)
+            # # print('en_doc')
 
         elif url.endswith('_C.HTM'):
             HTM_folder = base_folders[3] + name + '/'
