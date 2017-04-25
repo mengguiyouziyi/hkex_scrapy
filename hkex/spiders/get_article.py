@@ -14,10 +14,16 @@ class HkexSpider(CrawlSpider):
     def start_requests(self):
         with codecs.open('hkex_cn.txt', 'r', 'utf-8') as file:
             hkex_cns = file.readlines()
-        for hkex_cn in hkex_cns:
-            yield scrapy.Request('http://www.hkexnews.hk'+hkex_cn.strip(), callback=self.parse_item)
+        for index, hkex_cn in enumerate(hkex_cns):
+            count = index + 1
+            if count < 5583 or count > 8583:
+                continue
+            request = scrapy.Request('http://www.hkexnews.hk'+hkex_cn.strip(), callback=self.parse_item)
+            request.meta['count'] = count
+            yield request
 
     def parse_item(self, response):
+        count = response.meta['count']
         # http://www.hkexnews.hk/listedco/listconews/SEHK/2016/1027/LTN20161027393_C.pdf
         base_folders = ['./download/pdf/', './download/xls/', './download/doc/', './download/HTM/', './download/other/',]
         for base_folder in base_folders:
@@ -26,7 +32,7 @@ class HkexSpider(CrawlSpider):
         url = response.url
         # print('##################################'+url)
         url, number = re.subn(r'\d+\.\d+\.\d+\.\d+\/', '', url)
-        print('@'+url)
+        print(('%s@' % str(count)) + url)
         if '.' not in url.split('/')[-1]:
             pass
         name = url.split('/')[-1].split('.')[-2] # 纯文件名，如LTN20161027393_C
