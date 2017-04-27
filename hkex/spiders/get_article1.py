@@ -16,7 +16,7 @@ class HkexSpider(CrawlSpider):
             hkex_cns = file.readlines()
         for index, hkex_cn in enumerate(hkex_cns):
             count = index + 1
-            if count < 109227:
+            if count < 63662:
                 continue
             request = scrapy.Request('http://www.hkexnews.hk'+hkex_cn.strip(), callback=self.parse_item)
             request.meta['count'] = count
