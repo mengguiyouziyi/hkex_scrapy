@@ -20,7 +20,7 @@ class HkexSpider(CrawlSpider):
             #     continue
             if not hkex_cn.lower().endswith('_c.doc'):
                 continue
-            return scrapy.Request(url='http://www.hkexnews.hk'+hkex_cn.strip(), meta={'count':count},callback=self.parse_item)
+            yield scrapy.Request(url='http://www.hkexnews.hk'+hkex_cn.strip(), meta={'count':count}, callback=self.parse_item)
 
     def parse_item(self, response):
         count = response.meta['count']
