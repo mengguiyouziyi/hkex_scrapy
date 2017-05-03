@@ -23,6 +23,7 @@ class HkexSpider(CrawlSpider):
             yield scrapy.Request(url='http://www.hkexnews.hk'+hkex_cn.strip(), meta={'count':count}, callback=self.parse_item)
 
     def parse_item(self, response):
+        print(response.url)
         count = response.meta['count']
         # http://www.hkexnews.hk/listedco/listconews/SEHK/2016/1027/LTN20161027393_C.pdf
         base_folders = ['./download/pdf/', './download/xls/', './download/doc/', './download/HTM/', './download/other/',]
