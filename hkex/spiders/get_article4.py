@@ -10,7 +10,7 @@ import re
 
 # http://101.96.10.26/www.hkexnews.hk/listedco/listconews/GEM/2016/1027/GLN2016102763.pdf
 class HkexSpider(CrawlSpider):
-    name = 'get_article5'
+    name = 'get_article4'
     def start_requests(self):
         with codecs.open('hkex_cn.txt', 'r', 'utf-8') as file:
             hkex_cns = file.readlines()
