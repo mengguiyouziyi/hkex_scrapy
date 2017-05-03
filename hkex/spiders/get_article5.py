@@ -18,12 +18,10 @@ class HkexSpider(CrawlSpider):
             count = index + 1
             # if count < 125583:
             #     continue
-            if not hkex_cn.lower().endswith('_c.doc'):
-                continue
-            yield scrapy.Request(url='http://www.hkexnews.hk'+hkex_cn.strip(), meta={'count':count}, callback=self.parse_item)
+            if hkex_cn.strip().lower().endswith('_c.doc'):
+                yield scrapy.Request(url='http://www.hkexnews.hk'+hkex_cn.strip(), meta={'count':count}, callback=self.parse_item)
 
     def parse_item(self, response):
-        print(response.url)
         count = response.meta['count']
         # http://www.hkexnews.hk/listedco/listconews/SEHK/2016/1027/LTN20161027393_C.pdf
         base_folders = ['./download/pdf/', './download/xls/', './download/doc/', './download/HTM/', './download/other/',]
@@ -38,7 +36,7 @@ class HkexSpider(CrawlSpider):
             pass
         name = url.split('/')[-1].split('.')[-2] # 纯文件名，如LTN20161027393_C
         base_url = '/'.join(url.split('/')[:-1]) + '/'
-        doc_folder = base_folders[1] + name + '/'
+        doc_folder = base_folders[2] + name + '/'
         if not os.path.exists(doc_folder):
             os.makedirs(doc_folder)
 
@@ -51,6 +49,7 @@ class HkexSpider(CrawlSpider):
         # print('1111111111111'+url_test1)
         num_en = url.split('/')[-1][11:-6]
         url_test2 = base_url + url.split('/')[-1][:11] + str(int(num_en) - 1) + '.doc'
+        url_test3 = base_url + url.split('/')[-1][:11] + str(int(num_en) + 1) + '.doc'
         # print('2222222222222222'+url_test2)
         if self.test_url(url_test1) == 200:
             url_en = url_test1
@@ -67,10 +66,13 @@ class HkexSpider(CrawlSpider):
             article_name_en = name_en + '.doc'
             article_path_en = os.path.join(doc_folder, article_name_en)
             urlretrieve(url_en, article_path_en)
-            # print('en_xls')
-
-
-
+        elif self.test_url(url_test3) == 200:
+            url_en = url_test3
+            # print('========================' + url_en)
+            name_en = url_en.split('/')[-1].split('.')[-2]
+            article_name_en = name_en + '.doc'
+            article_path_en = os.path.join(doc_folder, article_name_en)
+            urlretrieve(url_en, article_path_en)
 
     def test_url(self, url):
         try:
